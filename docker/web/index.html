@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se insertarán los datos de los usuarios -->
+        </tbody>
+    </table>
+
+    <script>
+        // Consumir el endpoint de usuarios y mostrar los datos en la tabla
+        fetch('http://localhost:3100/users')
+            .then(response => response.json())
+            .then(data => {
+                const usersTable = document.getElementById('usersTable').getElementsByTagName('tbody')[0];
+
+                data.forEach(user => {
+                    let row = usersTable.insertRow();
+
+                    let cellId = row.insertCell(0);
+                    let cellName = row.insertCell(1);
+                    let cellEmail = row.insertCell(2);
+
+                    cellId.textContent = user.id;  // Cambia 'id' por el nombre de la columna de tu tabla de usuarios
+                    cellName.textContent = user.name;  // Cambia 'name' por el nombre de la columna
+                    cellEmail.textContent = user.email;  // Cambia 'email' por el nombre de la columna
+                });
+            })
+            .catch(error => console.error('Error al obtener los usuarios:', error));
+    </script>
+</body>
+</html>

@@ -10,9 +10,9 @@ app.use(cors());
 
 // Configuración de la conexión a la base de datos
 const connection = mysql.createConnection({
-    // host: 'localhost',
+    //host: 'localhost',
     host: 'node.contmysql',
-    // port: 3307,
+    //port: 3308,
     user: 'sa',
     password: 'enter123@',
     database: 'projectExa'
@@ -33,6 +33,16 @@ app.get('/users', (req, res) => {
         res.json(rows);
     });
 });
+
+app.get('/products', (req, res) => {
+    connection.query('SELECT * FROM products', (error, rows) => {
+        if (error) {
+            return res.status(500).json({ error: 'Error en la consulta' });
+        }
+        res.json(rows);
+    });
+});
+
 
 // Iniciar el servidor
 app.listen(port, () => {

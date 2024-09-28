@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda en Línea</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    header {
+        background: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+    nav a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .banner {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .banner img {
+        max-width: 100%;
+        height: auto;
+    }
+    main {
+        padding: 20px;
+    }
+    .producto {
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+    }
+    .producto img {
+        max-width: 100%;
+        height: auto;
+    }
+    footer {
+        text-align: center;
+        padding: 10px 0;
+        background: #333;
+        color: #fff;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+</style>
+<body>
+    <header>
+        <h1>Tienda en Línea</h1>
+        <nav>
+            <ul>
+                <li><a href="#ecommerce">Productos</a></li>
+                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#carrito">Carrito</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <img src="https://pm1.aminoapps.com/7015/0102226ac2e9bd46eec572464ee9b7ed010be3a6r1-1500-500v2_hq.jpg" alt="Banner Promocional" />
+    </div>
+
+    <br>
+    <table id="productsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se insertarán los datos de los usuarios -->
+        </tbody>
+    </table>
+
+    <br>
+
+    <footer>
+        <p>&copy; 2024 Tienda en Línea. Todos los derechos reservados.</p>
+    </footer>
+
+<script>
+    // Consumir el endpoint de usuarios y mostrar los datos en la tabla
+    fetch('http://localhost:3100/products')
+        .then(response => response.json())
+        .then(data => {
+            const productsTable = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
+
+            data.forEach(product => {
+                let row = productsTable.insertRow();
+
+                let cellId = row.insertCell(0);
+                let cellName = row.insertCell(1);
+                let cellDescription = row.insertCell(2);
+                let cellPrice = row.insertCell(3);
+
+                cellId.textContent = product.id;  // Cambia 'id' por el nombre de la columna de tu tabla de usuarios
+                cellName.textContent = product.name;  // Cambia 'name' por el nombre de la columna
+                cellDescription.textContent = product.descripcion;  // Cambia 'email' por el nombre de la columna
+                cellPrice.textContent = product.price;  // Cambia 'email' por el nombre de la columna
+            });
+        })
+        .catch(error => console.error('Error al obtener los prodcuts:', error));
+</script>
+
+</body>
+</html>

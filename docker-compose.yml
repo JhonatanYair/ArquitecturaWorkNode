@@ -5,7 +5,7 @@ services:
   node.contmysql:
     image: mysql:8.0.29
     ports:
-      - '3307:3306'
+      - '3308:3306'
     environment: 
       MYSQL_DATABASE: 'projectExa'
       MYSQL_USER: 'sa'
@@ -30,7 +30,7 @@ services:
       context: .
       dockerfile: ./docker/web/Dockerfile
     ports:
-      - "8080:80"
+      - "8083:80"
       
 volumes:
   mysql-data:
